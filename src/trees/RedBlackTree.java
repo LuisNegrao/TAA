@@ -4,7 +4,7 @@ import trees.node.Node;
 
 public class RedBlackTree<T extends Comparable<T>> extends Tree<T> {
 
-    private Node<T> root;
+    public Node<T> root;
     private int size;
 
     public RedBlackTree(Node<T> root) {

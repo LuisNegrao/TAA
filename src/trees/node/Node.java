@@ -3,11 +3,11 @@ package trees.node;
 import com.sun.istack.internal.NotNull;
 
 public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
-    public T info;
-    public Node<T> parent;
-    public Node<T> left;
-    public Node<T> right;
-    public String color;
+    private T info;
+    private Node<T> parent;
+    private Node<T> left;
+    private Node<T> right;
+    private String color;
     private int height;
     /*Constructor*/
 
