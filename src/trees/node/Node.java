@@ -3,7 +3,7 @@ package trees.node;
 import com.sun.istack.internal.NotNull;
 
 public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
-    T info;
+    public T info;
     public Node<T> parent;
     public Node<T> left;
     public Node<T> right;
@@ -45,13 +45,13 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         this.parent = parent;
     }
 
-    public Node<T> setLeft(Node<T> left) {
-        return this.left = left;
+    public void setLeft(Node<T> left) {
+        this.left = left;
 
     }
 
-    public Node<T> setRight(Node<T> right) {
-        return this.right = right;
+    public void setRight(Node<T> right) {
+        this.right = right;
         //System.out.println(this.right.toString());
     }
 
@@ -83,6 +83,19 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
 
     public Boolean isLowerThan(@NotNull Node<T> other) {
         return this.getInfo().compareTo(other.getInfo()) < 0;
+    }
+
+    public Node<T> getSibling() {
+
+        Node<T> parent = this.getParent();
+
+        if(parent.getRight().compareTo(this) == 0) {
+            return parent.getLeft();
+        } else {
+            return parent.getRight();
+        }
+
+
     }
 
     @Override

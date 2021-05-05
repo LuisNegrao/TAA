@@ -111,12 +111,12 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
     }
 
     private Node<T> removeRec(Node<T> curr, Node<T> value) {
-
+        System.out.println((curr));
         if (curr == null) {
             return null;
         }
 
-        if (value == curr.getInfo()) {
+        if (value.getInfo() == curr.getInfo()) {
 
             if (curr.getRight() == null) {
                 return curr.getLeft();
@@ -127,6 +127,7 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
             }
 
             Node<T> node = findSmallest(curr.getRight());
+            System.out.println(node);
             curr.setInfo(node.getInfo());
             curr.setRight(removeRec(curr.getRight(), node));
             return curr;
@@ -154,24 +155,24 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
 
     @Override
     public void print() {
-        System.out.println(this.root.getInfo());
+        System.out.println(this.root);
 
-        LinkedList<Node<T>> nodes = new LinkedList<>();
-
-        nodes.add(this.root);
-
-        while (!nodes.isEmpty()) {
-
-            Node<T> node = nodes.remove();
-            System.out.println(node);
-
-            if (node.getLeft() != null) {
-                nodes.add(node.getLeft());
-            }
-
-            if (node.getRight() != null) {
-                nodes.add(node.getRight());
-            }
-        }
+//        LinkedList<Node<T>> nodes = new LinkedList<>();
+//
+//        nodes.add(this.root);
+//
+//        while (!nodes.isEmpty()) {
+//
+//            Node<T> node = nodes.remove();
+//            System.out.println(node);
+//
+//            if (node.getLeft() != null) {
+//                nodes.add(node.getLeft());
+//            }
+//
+//            if (node.getRight() != null) {
+//                nodes.add(node.getRight());
+//            }
+//        }
     }
 }
