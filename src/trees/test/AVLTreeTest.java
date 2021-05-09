@@ -9,14 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class AVLTreeTest {
 
     @Test
-    void rotate() {
-
-
-
-
-    }
-
-    @Test
     void insert() {
 
         AVLTree<Integer> tree = new AVLTree<>(new Node<>(4));
@@ -43,6 +35,19 @@ class AVLTreeTest {
 
     @Test
     void contains() {
+
+        AVLTree<Integer> tree = new AVLTree<>(new Node<>(4));
+
+        tree.insert(new Node<>(5));
+        tree.insert(new Node<>(6));
+        tree.insert(new Node<>(7));
+        tree.insert(new Node<>(8));
+        tree.insert(new Node<>(3));
+        tree.insert(new Node<>(2));
+
+        assertTrue(tree.contains(new Node<>(5)));
+        assertTrue(tree.contains(new Node<>(8)));
+        assertFalse(tree.contains(new Node<>(80)));
 
     }
 
