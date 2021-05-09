@@ -4,6 +4,7 @@ import trees.node.Node;
 
 public abstract class Tree<T extends Comparable<T>> {
 
+    //AVL BST and Splay Tree Methods
     public abstract void insert(Node<T> node);
     public abstract boolean contains(Node<T> node);
     public abstract Node<T> find(Node<T> node);

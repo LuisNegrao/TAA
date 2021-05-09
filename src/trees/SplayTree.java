@@ -1,5 +1,5 @@
 package trees;
-//https://www.sanfoundry.com/java-program-implement-splay-tree/
+
 import trees.node.Node;
 
 public class SplayTree<T extends Comparable<T>> extends Tree<T> {
@@ -144,7 +144,6 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
 
     @Override
     public void print() {
-
     }
 
     @Override

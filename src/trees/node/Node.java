@@ -3,12 +3,14 @@ package trees.node;
 import com.sun.istack.internal.NotNull;
 
 public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
+   //For AVL Splay and BST
     private T info;
     private Node<T> parent;
-    private Node<T> left;
-    private Node<T> right;
     private String color;
     private int height;
+    private Node<T> left;
+    private Node<T> right;
+
     /*Constructor*/
 
     public Node(T info) {
@@ -19,6 +21,8 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         this.info = info;
         this.parent = parent;
     }
+
+
 
     /*Getters and Setters*/
     public T getInfo() {
@@ -62,6 +66,7 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     public void setColor(String color) {
         this.color = color;
     }
+
 
     @Override
     public int compareTo(@NotNull Node<T> o) {
