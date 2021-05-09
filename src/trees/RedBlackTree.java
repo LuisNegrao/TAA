@@ -132,20 +132,12 @@ public class RedBlackTree<T extends Comparable<T>> extends Tree<T> {
     }
 
     @Override
+    public Node<T> find(Node<T> node, Node<T> current) {
+        return super.find(node, current);
+    }
+
     public Node<T> find(Node<T> node) {
-
-        Node<T> current = this.root;
-
-        while (current != null && current.getInfo().compareTo(node.getInfo()) != 0) {
-
-            if( current.isGreaterThan(node)) {
-                current = current.getLeft();
-            } else if (current.isLowerThan(node)) {
-                current = current.getRight();
-            }
-
-        }
-        return current;
+        return find(node, this.root);
     }
 
 

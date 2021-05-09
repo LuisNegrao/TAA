@@ -18,8 +18,25 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
     }
 
     private void updateHeight(Node<T> node) {
-        node.setHeight(1 + Math.max(node.getRight().getHeight(),
-                node.getLeft().getHeight()));
+
+        if (node != null) {
+
+            int height1 = 0, height2 = 0;
+
+            if (node.getLeft() != null) {
+                height1 = node.getLeft().getHeight();
+            }
+
+            if (node.getRight() != null) {
+                height2 = node.getRight().getHeight();
+            }
+
+            int height = Math.max(height1, height2);
+
+            node.setHeight(1 + height);
+        }
+
+
     }
 
     private int height(Node<T> node) {
@@ -32,8 +49,8 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
 
 
     private Node<T> rotateRight(Node<T> node) {
-        Node<T> rightNode = node.getRight();
-        Node<T> leftNode = rightNode.getLeft();
+        Node<T> rightNode = node.getLeft();
+        Node<T> leftNode = rightNode.getRight();
         rightNode.setRight(node);
         node.setLeft(leftNode);
         updateHeight(node);
@@ -73,23 +90,28 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
         return node;
     }
 
-    private Node<T> insertRec(Node<T> curr, Node<T> value) {
+    private Node<T> insertRec(Node<T> curr, Node<T> parent, Node<T> value) {
 
         if (curr == null) {
-            return null;
-        } else if (curr.getInfo().compareTo(value.getInfo()) < 0) {
-            curr.setRight(insertRec(curr.getLeft(), value));
-        } else if (curr.getInfo().compareTo(value.getInfo()) > 0) {
-            curr.setLeft(insertRec(curr.getRight(), value));
-        } else {
-            System.out.println("duplicated Value");
+            size++;
+            value.setParent(parent);
+            return value;
         }
+
+        if (curr.isGreaterThan(value)) {
+            curr.setLeft(insertRec(curr.getLeft(), curr, value));
+        } else if (curr.isLowerThan(value)) {
+            curr.setRight(insertRec(curr.getRight(), curr, value));
+        } else {
+            return curr;
+        }
+
         return rebalance(curr);
     }
 
     @Override
     public void insert(Node<T> node) {
-        this.root = insertRec(this.root, node);
+        this.root = insertRec(this.root, null, node);
     }
 
     private boolean containsRec(Node<T> curr, Node<T> value) {
@@ -166,6 +188,6 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
 
     @Override
     public void print() {
-
+        System.out.println(this.root);
     }
 }

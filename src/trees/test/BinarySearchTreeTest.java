@@ -1,7 +1,8 @@
-package trees;
+package trees.test;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import trees.BinarySearchTree;
 import trees.node.Node;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +18,8 @@ class BinarySearchTreeTest {
         teste.insert(new Node<>(3));
         teste.insert(new Node<>(10));
         teste.insert(new Node<>(6));
+
+        teste.print();
 
         assertEquals(9,teste.find(new Node<>(9)).getInfo());
         assertEquals(5,teste.find(new Node<>(5)).getInfo());
