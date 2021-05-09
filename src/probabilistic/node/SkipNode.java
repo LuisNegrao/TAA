@@ -1,4 +1,4 @@
-package randomized.node;
+package probabilistic.node;
 
 public class SkipNode {
     public int key;
