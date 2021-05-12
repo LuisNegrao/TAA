@@ -68,10 +68,12 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
 
             node.setParent(null);
             parent.setParent(node);
+            this.root = node;
 
-           if (parent.getLeft() != null) {
-               parent.getLeft().setParent(parent);
-           }
+
+            if (parent.getLeft() != null) {
+                parent.getLeft().setParent(parent);
+            }
 
         } else {
 
@@ -117,6 +119,7 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
 
             node.setParent(null);
             parent.setParent(node);
+            this.root = node;
 
             if (parent.getRight() != null) {
                 parent.getRight().setParent(parent);
@@ -184,7 +187,7 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
                         zig(node, node.getParent());
 
                     } else {
-                       // System.out.println("hello2");
+                        // System.out.println("hello2");
                         zag(node, parent);
                         zag(node, node.getParent());
                     }
@@ -250,6 +253,7 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
             return null;
         }
 
+
         if (this.size == 1) {
             if (node.getInfo().compareTo(this.root.getInfo()) == 0) {
                 Node<T> n = this.root;
@@ -257,39 +261,42 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
                 return n;
             } else return null;
         }
+        print();
         splay(find(node));
         print();
         Node<T> n = this.root;
         Node<T> rightSide = this.root.getRight();
         Node<T> leftSide = this.root.getLeft();
+
         if (this.root.getLeft() != null) {
+
             Node<T> newRoot = findBiggest(leftSide);
 
-            leftSide = removeinst(leftSide);
+            find(newRoot).getParent().setRight(null);
 
             newRoot.setRight(rightSide);
             newRoot.setLeft(leftSide);
             this.root = newRoot;
-            this.root.setParent(null);
 
         } else {
             this.root = this.root.getRight();
-            this.root.setParent(null);
         }
+        this.root.setParent(null);
         return n;
     }
 
-    private Node<T> removeinst(Node<T> side) {
+/*    private Node<T> removeinst(Node<T> side) {
 
         Node<T> temp = side;
 
-        while (side.getRight().getRight() != null) {
+        while (side.getRight() != null) {
             side = side.getRight();
         }
-
-        side.setRight(null);
+        System.out.println("--");
+        System.out.println(side);
+        //side.getParent().setRight(null);
         return temp;
-    }
+    }*/
 
     @Override
     public Node<T> findSmallest(Node<T> node) {

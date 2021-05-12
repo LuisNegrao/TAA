@@ -154,23 +154,27 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
         return findRec(this.root, node);
     }
 
-    private Node<T> removeRec(Node<T> curr, Node<T> value) {
+    private Node<T> removeRec(Node<T> curr, Node<T> value, Node<T> removed) {
 
         if (curr == null) {
             return null;
         }
 
         if (curr.getInfo().compareTo(value.getInfo()) > 0) {
-            curr.setLeft(removeRec(curr.getLeft(), value));
+            curr.setLeft(removeRec(curr.getLeft(), value, removed));
         } else if (curr.getInfo().compareTo(value.getInfo()) < 0) {
-            curr.setRight(removeRec(curr.getRight(), value));
+            curr.setRight(removeRec(curr.getRight(), value, removed));
         } else {
             if (curr.getLeft() == null || curr.getRight() == null) {
                 curr = curr.getLeft() == null ? curr.getRight() : curr.getLeft();
             } else {
+                if (removed.getInfo() == null) {
+                    System.out.println(curr);
+                    removed = curr;
+                }
                 Node<T> smallestNode = findSmallest(curr.getRight());
                 curr.setInfo(smallestNode.getInfo());
-                curr.setRight(removeRec(curr.getRight(), curr));
+                curr.setRight(removeRec(curr.getRight(), curr, removed));
             }
         }
 
@@ -183,7 +187,12 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
 
     @Override
     public Node<T> remove(Node<T> node) {
-        return this.root = removeRec(this.root, node);
+        Node<T> removed = new Node<T>();
+        if(!this.contains(node)) {
+            return null;
+        }
+        this.root = removeRec(this.root, node,removed);
+        return removed;
     }
 
     @Override
