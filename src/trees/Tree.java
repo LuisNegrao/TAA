@@ -30,5 +30,8 @@ public abstract class Tree<T extends Comparable<T>> {
     public Node<T> findSmallest(Node<T> node) {
         return node.getLeft() == null ? node : findSmallest(node.getLeft());
     }
+    public Node<T> findBiggest(Node<T> node) {
+        return node.getRight() == null ? node : findBiggest(node.getRight());
+    }
 
 }

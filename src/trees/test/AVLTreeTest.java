@@ -20,8 +20,6 @@ class AVLTreeTest {
         tree.insert(new Node<>(3));
         tree.insert(new Node<>(2));
 
-        tree.print();
-
         assertEquals(7, tree.find(new Node<>(5)).getRight().getInfo());
         assertEquals(3, tree.find(new Node<>(5)).getLeft().getInfo());
         assertEquals(6, tree.find(new Node<>(7)).getLeft().getInfo());
@@ -54,6 +52,19 @@ class AVLTreeTest {
     @Test
     void find() {
 
+        AVLTree<Integer> tree = new AVLTree<>(new Node<>(4));
+
+        tree.insert(new Node<>(5));
+        tree.insert(new Node<>(6));
+        tree.insert(new Node<>(7));
+        tree.insert(new Node<>(8));
+        tree.insert(new Node<>(3));
+        tree.insert(new Node<>(2));
+
+        assertEquals(5, tree.find(new Node<>(5)).getInfo());
+        assertEquals(8, tree.find(new Node<>(8)).getInfo());
+        assertEquals(2, tree.find(new Node<>(2)).getInfo());
+
     }
 
     @Test
@@ -68,12 +79,6 @@ class AVLTreeTest {
         tree.insert(new Node<>(2));
 
         tree.remove(new Node<>(3));
-
-        tree.print();
-
-        //assertEquals(2, tree.find(new Node<>(5)).getLeft().getInfo());
-
-
 
     }
 }

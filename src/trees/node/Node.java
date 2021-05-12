@@ -10,7 +10,6 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     private int height;
     private Node<T> left;
     private Node<T> right;
-
     /*Constructor*/
 
     public Node(T info) {
@@ -21,8 +20,6 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         this.info = info;
         this.parent = parent;
     }
-
-
 
     /*Getters and Setters*/
     public T getInfo() {
@@ -105,11 +102,21 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
 
     @Override
     public String toString() {
-        return "Node{" +
-                "info=" + info +
-                //", parent=" + parent.getInfo() + "\n"+
-                ", left=" + left +
-                ", right=" + right +
-                '}';
+
+        if (parent == null) {
+            return "Node{" +
+                    "info=" + info +
+                   // ", parent=" + parent.info + "\n"+
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        } else {
+            return "Node{" +
+                    "info=" + info +
+                    ", parent=" + parent.info + "\n"+
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
     }
 }
