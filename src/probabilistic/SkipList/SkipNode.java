@@ -1,4 +1,4 @@
-package probabilistic.node;
+package probabilistic.SkipList;
 
 public class SkipNode {
     public int key;

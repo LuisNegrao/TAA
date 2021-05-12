@@ -1,7 +1,5 @@
 package probabilistic.SkipList;
 
-import probabilistic.node.SkipNode;
-
 import java.util.Random;
 
 public class SkipList {
