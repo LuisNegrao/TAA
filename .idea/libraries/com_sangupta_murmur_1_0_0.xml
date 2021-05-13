@@ -2,7 +2,7 @@
   <library name="com.sangupta:murmur:1.0.0" type="repository">
     <properties maven-id="com.sangupta:murmur:1.0.0" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/sangupta/murmur/1.0.0/murmur-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/murmur-1.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

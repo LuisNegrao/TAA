@@ -35,4 +35,5 @@ public abstract class Tree<T extends Comparable<T>> {
         return node.getRight() == null ? node : findBiggest(node.getRight());
     }
 
+    public abstract void clear();
 }

@@ -188,15 +188,21 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
     @Override
     public Node<T> remove(Node<T> node) {
         Node<T> removed = new Node<T>();
-        if(!this.contains(node)) {
+        if (!this.contains(node)) {
             return null;
         }
-        this.root = removeRec(this.root, node,removed);
+        this.root = removeRec(this.root, node, removed);
         return removed;
     }
 
     @Override
     public void print() {
         System.out.println(this.root);
+    }
+
+    @Override
+    public void clear() {
+        this.root = null;
+        this.size = 0;
     }
 }

@@ -333,7 +333,7 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
     public void print() {
         System.out.println(this.root);
     }
-
+    @Override
     public void clear() {
         this.root = null;
         this.size = 0;

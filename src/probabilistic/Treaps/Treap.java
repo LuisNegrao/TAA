@@ -78,9 +78,9 @@ public class Treap<T extends Comparable<T>> {
     //------DELETE---------
     public void delete(T key) {
         if(this.search(key)) {
-            System.out.println("Node "+key+" exists , let's delete him");
+            //System.out.println("Node "+key+" exists , let's delete him");
             root = delete(root, key);
-        }else System.out.println("Node "+key+" does not exist");
+        }
     }
     private TNode<T> delete(TNode<T> cur , T key){
         if(cur == nil) return cur;
@@ -138,6 +138,7 @@ public class Treap<T extends Comparable<T>> {
 
     //---------MERGE TREES------------
     public void merge(Treap<T> right, Treap<T> left) {
+
     }
 
     /*Auxiliar methods*/
