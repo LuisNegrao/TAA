@@ -1,6 +1,7 @@
 package probabilistic.test;
 
 import org.junit.jupiter.api.Test;
+import probabilistic.SkipList.SkipList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +13,7 @@ class SkipListTest {
 
     @Test
     void insert() {
+
     }
 
     @Test
