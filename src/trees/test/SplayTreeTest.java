@@ -1,5 +1,6 @@
 package trees.test;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import trees.Splay.SplayTree;
 import trees.node.Node;
@@ -11,20 +12,6 @@ class SplayTreeTest {
     @Test
     void insert() {
 
-        SplayTree<Integer> tree = new SplayTree<Integer>();
-
-        for (int i = 0; i < 10; i++) {
-            tree.insert(new Node<>(new Random().nextInt()));
-        }
-        tree.clear();
-        for (int i = 0; i < 100; i++) {
-            tree.insert(new Node<>(new Random().nextInt()));
-        }
-        tree.clear();
-        for (int i = 0; i < 10000000; i++) {
-            tree.insert(new Node<>(new Random().nextInt()));
-        }
-
     }
 
     @Test
@@ -33,6 +20,7 @@ class SplayTreeTest {
 
     @Test
     void find() {
+
     }
 
     @Test
@@ -42,19 +30,7 @@ class SplayTreeTest {
     @Test
     void remove() {
 
-        SplayTree<Integer> tree = new SplayTree<Integer>();
-
-        for (int i = 0; i < 1000; i++) {
-            tree.insert(new Node<>(new Random().nextInt(10000)));
-        }
-        //tree.print();
-        System.out.println("--------------------");
-        for (int i = 0; i < 1000; i++) {
-            tree.remove(new Node<Integer>(new Random().nextInt(10000)));
-        }
-        tree.print();
     }
-
 
     @Test
     void removeAux() {

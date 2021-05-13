@@ -222,15 +222,16 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
 
     @Override
     public Node<T> find(Node<T> cur, Node<T> value) {
-        if (cur == null)
-            return null;
-        if (cur.getInfo().compareTo(value.getInfo()) == 0)
-            return cur;
 
-        if (cur.isGreaterThan(value)) {
-            return find(cur.getLeft(), value);
-        } else if (cur.isLowerThan(value)) {
-            return find(cur.getRight(), value);
+        while (cur != null) {
+           // System.out.println(cur);
+            if (cur.isGreaterThan(value)) {
+                cur = cur.getLeft();
+            } else if (cur.isLowerThan(value)) {
+                cur = cur.getRight();
+            } else {
+                return cur;
+            }
         }
         return null;
     }
@@ -245,9 +246,9 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
     @Override
     public Node<T> remove(Node<T> node) {
 
-        if (!contains(node)) {
-            return null;
-        }
+//        if (!contains(node)) {
+//            return null;
+//        }
 
 
         if (node.getInfo().compareTo(this.root.getInfo()) == 0) {
@@ -259,13 +260,16 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
 
 
         //Find required nodes
-        splay(find(node));
+        Node<T> n = find(node);
+        if (n == null) {
+            return null;
+        }
+        splay(n);
         //Select the new root
 
 
         if (this.root.getLeft() != null) {
             Node<T> newRoot = findAndDeleteBiggest(this.root.getLeft());
-
             //In case our first left side element is the "rightmost element" on the right side
             if (newRoot.getLeft() != null) {
                 newRoot.setRight(this.root.getRight());

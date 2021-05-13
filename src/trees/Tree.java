@@ -8,18 +8,19 @@ public abstract class Tree<T extends Comparable<T>> {
     public abstract void insert(Node<T> node);
     public abstract boolean contains(Node<T> node);
 
-    public Node<T> find(Node<T> node, Node<T> current) {
+    public Node<T> find(Node<T> cur, Node<T> value) {
 
-        while (current != null && current.getInfo().compareTo(node.getInfo()) != 0) {
+        while (cur != null) {
 
-            if( current.isGreaterThan(node)) {
-                current = current.getLeft();
-            } else if (current.isLowerThan(node)) {
-                current = current.getRight();
+            if (cur.isGreaterThan(value)) {
+                cur = cur.getLeft();
+            } else if (cur.isLowerThan(value)) {
+                cur = cur.getRight();
+            } else {
+                return cur;
             }
-
         }
-        return current;
+        return null;
     }
 
     public abstract Node<T> find(Node<T> node);

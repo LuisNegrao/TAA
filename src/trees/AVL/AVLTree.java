@@ -84,7 +84,7 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
             if (height((node.getLeft().getLeft())) > height(node.getLeft().getRight())) {
                 node = rotateRight(node);
             } else {
-                node.setLeft(node.getLeft());
+                node.setLeft(rotateLeft(node.getLeft()));
                 node = rotateRight(node);
             }
         }
@@ -170,7 +170,6 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
                 curr = curr.getLeft() == null ? curr.getRight() : curr.getLeft();
             } else {
                 if (removed.getInfo() == null) {
-                    System.out.println(curr);
                     removed = curr;
                 }
                 Node<T> smallestNode = findSmallest(curr.getRight());
@@ -182,7 +181,7 @@ public class AVLTree<T extends Comparable<T>> extends Tree<T> {
         if (curr != null) {
             curr = rebalance(curr);
         }
-
+        //System.out.println(curr);
         return curr;
     }
 
