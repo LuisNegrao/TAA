@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import trees.SplayTree;
 import trees.node.Node;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SplayTreeTest {
@@ -11,18 +14,20 @@ class SplayTreeTest {
     @Test
     void insert() {
 
-        SplayTree<Integer> tree = new SplayTree<Integer>(new Node<>(5));
+        SplayTree<Integer> tree = new SplayTree<Integer>();
 
-        tree.insert(new Node<>(15));
-        tree.insert(new Node<>(14));
-        tree.insert(new Node<>(1));
-        tree.insert(new Node<>(3));
-        tree.insert(new Node<>(12));
-        tree.insert(new Node<>(2));
-        tree.insert(new Node<>(8));
-        tree.insert(new Node<>(9));
-        System.out.println("--");
-        tree.print();
+        for (int i = 0; i < 10; i++) {
+            tree.insert(new Node<>(new Random().nextInt()));
+        }
+        tree.clear();
+        for (int i = 0; i < 100; i++) {
+            tree.insert(new Node<>(new Random().nextInt()));
+        }
+        tree.clear();
+        for (int i = 0; i < 1000000; i++) {
+            tree.insert(new Node<>(new Random().nextInt()));
+        }
+
     }
 
     @Test
@@ -40,22 +45,19 @@ class SplayTreeTest {
     @Test
     void remove() {
 
-        SplayTree<Integer> tree = new SplayTree<Integer>(new Node<>(10));
+        SplayTree<Integer> tree = new SplayTree<Integer>();
 
-        tree.insert(new Node<>(5));
-        tree.insert(new Node<>(7));
-        tree.insert(new Node<>(1));
-        tree.insert(new Node<>(3));
-        tree.insert(new Node<>(12));
-        tree.insert(new Node<>(2));
-        tree.insert(new Node<>(8));
-        tree.insert(new Node<>(9));
-
-        tree.remove(new Node<>(9));
-
+        for (int i = 0; i < 1000; i++) {
+            tree.insert(new Node<>(new Random().nextInt(10000)));
+        }
+        //tree.print();
+        System.out.println("--------------------");
+        for (int i = 0; i < 1000; i++) {
+            tree.remove(new Node<Integer>(new Random().nextInt(10000)));
+        }
         tree.print();
-
     }
+
 
     @Test
     void removeAux() {

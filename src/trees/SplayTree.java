@@ -69,9 +69,9 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
             node.setParent(null);
             parent.setParent(node);
 
-           if (parent.getLeft() != null) {
-               parent.getLeft().setParent(parent);
-           }
+            if (parent.getLeft() != null) {
+                parent.getLeft().setParent(parent);
+            }
 
         } else {
 
@@ -184,7 +184,7 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
                         zig(node, node.getParent());
 
                     } else {
-                       // System.out.println("hello2");
+                        // System.out.println("hello2");
                         zag(node, parent);
                         zag(node, node.getParent());
                     }
@@ -202,45 +202,40 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
 
         if (value.getInfo().compareTo(curr.getInfo()) == 0) {
             return true;
-        }
-
-        if (value.getInfo().compareTo(curr.getInfo()) > 0) {
+        } else if (curr.isLowerThan(value)) {
             return containsRec(curr.getRight(), value);
-        }
-
-        return containsRec(curr.getLeft(), value);
+        } else
+            return containsRec(curr.getLeft(), value);
 
     }
 
     @Override
     public boolean contains(Node<T> node) {
-        return containsRec(this.root, node);
+        Node<T> curr = this.root;
+        return containsRec(curr, node);
     }
 
-    private Node<T> findRec(Node<T> curr, Node<T> value) {
-
-        if (curr.getRight() == null && curr.getLeft() == null)
-            return null;
-
-        if (curr.getInfo().compareTo(value.getInfo()) == 0) {
-            return value;
-        }
-
-        if (curr.isGreaterThan(value)) {
-            return findRec(curr.getRight(), value);
-        }
-
-        return findRec(curr.getLeft(), value);
-    }
 
     @Override
-    public Node<T> find(Node<T> node, Node<T> current) {
-        return super.find(node, current);
+    public Node<T> find(Node<T> cur, Node<T> value) {
+        if (cur == null)
+            return null;
+        if (cur.getInfo().compareTo(value.getInfo()) == 0)
+            return cur;
+
+        if (cur.isGreaterThan(value)) {
+            return find(cur.getLeft(), value);
+        } else if (cur.isLowerThan(value)) {
+            return find(cur.getRight(), value);
+        }
+        return null;
     }
 
     @Override
     public Node<T> find(Node<T> node) {
-        return find(node, this.root);
+        Node<T> curr = this.root;
+        return find(curr, node);
+
     }
 
     @Override
@@ -250,45 +245,52 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
             return null;
         }
 
-        if (this.size == 1) {
-            if (node.getInfo().compareTo(this.root.getInfo()) == 0) {
-                Node<T> n = this.root;
-                this.root = null;
-                return n;
-            } else return null;
+
+        if (node.getInfo().compareTo(this.root.getInfo()) == 0) {
+            //System.out.println(this.root);
+            this.root = null;
+            size = 0;
+            return null;
         }
+
+
+        //Find required nodes
         splay(find(node));
-        print();
-        Node<T> n = this.root;
-        Node<T> rightSide = this.root.getRight();
-        Node<T> leftSide = this.root.getLeft();
+        //Select the new root
+
+
         if (this.root.getLeft() != null) {
-            Node<T> newRoot = findBiggest(leftSide);
+            Node<T> newRoot = findAndDeleteBiggest(this.root.getLeft());
 
-            leftSide = removeinst(leftSide);
+            //In case our first left side element is the "rightmost element" on the right side
+            if (newRoot.getLeft() != null) {
+                newRoot.setRight(this.root.getRight());
+                if (this.root.getRight() != null)
+                    this.root.getRight().setParent(newRoot);
 
-            newRoot.setRight(rightSide);
-            newRoot.setLeft(leftSide);
-            this.root = newRoot;
-            this.root.setParent(null);
+                this.root = newRoot;
 
+            } else {
+                //in case we found an actual rightmost element in the left side
+                newRoot.setRight(this.root.getRight());
+                newRoot.setLeft(this.root.getLeft());
+                if (this.root.getRight() != null)
+                    this.root.getRight().setParent(newRoot);
+                if (this.root.getLeft() != null)
+                    this.root.getLeft().setParent(newRoot);
+                this.root = newRoot;
+            }
+            return newRoot;
         } else {
-            this.root = this.root.getRight();
-            this.root.setParent(null);
+
+            Node<T> newRoot = this.root;
+            if (newRoot.getRight() != null)
+                newRoot = newRoot.getRight();
+
+            newRoot.setParent(null);
+
+            return newRoot;
         }
-        return n;
-    }
-
-    private Node<T> removeinst(Node<T> side) {
-
-        Node<T> temp = side;
-
-        while (side.getRight().getRight() != null) {
-            side = side.getRight();
-        }
-
-        side.setRight(null);
-        return temp;
     }
 
     @Override
@@ -301,10 +303,32 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
         return super.findBiggest(node);
     }
 
+    private Node<T> findAndDeleteBiggest(Node<T> cur) {
+
+        while (cur.getRight() != null) {
+            cur = cur.getRight();
+        }
+        //Since we always go to the right, we know that the parent is on the right
+        if (cur.getParent() != null) {
+            if (cur.getParent().isGreaterThan(cur)) {
+                cur.getParent().setLeft(null);
+            } else {
+                cur.getParent().setRight(null);
+            }
+        }
+        cur.setParent(null);
+        //System.out.println(cur);
+        return cur;
+    }
+
     @Override
     public void print() {
         System.out.println(this.root);
     }
 
+    public void clear() {
+        this.root = null;
+        this.size = 0;
+    }
 }
 
