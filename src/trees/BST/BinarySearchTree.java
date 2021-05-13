@@ -5,12 +5,15 @@ import com.sun.istack.internal.NotNull;
 import trees.Tree;
 import trees.node.Node;
 
-import java.util.LinkedList;
-
 public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
 
 
     public Node<T> root;
+
+    public int getSize() {
+        return size;
+    }
+
     private int size;
 
     public BinarySearchTree() {
@@ -32,13 +35,15 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
         if (current == null) {
             size++;
             value.setParent(parent);
+            value.depth = value.getParent().depth+1;
+            //System.out.println(value.depth);
             return value;
         }
 
         if (current.isGreaterThan(value)) {
-            current.setLeft(recursiveInsert(current.getLeft(),current ,value));
+            current.setLeft(recursiveInsert(current.getLeft(), current, value));
         } else if (current.isLowerThan(value)) {
-            current.setRight(recursiveInsert(current.getRight(),current ,value));
+            current.setRight(recursiveInsert(current.getRight(), current, value));
         } else {
             return current;
         }
@@ -46,19 +51,22 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
         return current;
     }
 
+    public void insert(T value){
+        insert(new Node<>(value));
+    }
     @Override
     public void insert(@NotNull Node<T> value) {
         if (root == null) {
             this.size++;
             this.root = value;
         } else {
-            this.root = recursiveInsert(this.root,null ,value);
+            this.root = recursiveInsert(this.root, null, value);
         }
     }
 
     private boolean containsRec(Node<T> curr, Node<T> value) {
 
-        if(curr == null)
+        if (curr == null)
             return false;
 
         if (value.getInfo().compareTo(curr.getInfo()) == 0) {
@@ -80,7 +88,7 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
 
     private Node<T> findRec(Node<T> curr, Node<T> value) {
 
-        if ( curr.getRight() == null && curr.getLeft() == null )
+        if (curr.getRight() == null && curr.getLeft() == null)
             return null;
 
         if (curr.getInfo().compareTo(value.getInfo()) == 0) {
@@ -98,13 +106,32 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
     public Node<T> find(Node<T> node, Node<T> current) {
         return super.find(node, current);
     }
+
     @Override
     public Node<T> find(Node<T> node) {
-        return find(node,this.root);
+        return find(node, this.root);
+    }
+
+
+    public int height() {
+        Node<T> cur = this.root;
+        return Math.max(height(cur.getLeft(), 0), height(cur.getRight(), 0));
+    }
+
+    private int height(Node<T> node, int i) {
+        if (node == null)
+            return i;
+        else if (node.getRight() != null && node.getLeft() != null)
+            return Math.max(height(node.getRight(), i + 1), height(node.getLeft(), i + 1));
+        else if (node.getRight() != null) {
+            return height(node.getRight(), i + 1);
+        } else if (node.getLeft() != null)
+            return height(node.getLeft(), i + 1);
+        else return i;
     }
 
     private Node<T> removeRec(Node<T> curr, Node<T> value) {
-        System.out.println((curr));
+        //System.out.println((curr));
         if (curr == null) {
             return null;
         }
@@ -120,7 +147,7 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
             }
 
             Node<T> node = findSmallest(curr.getRight());
-            System.out.println(node);
+            //System.out.println(node);
             curr.setInfo(node.getInfo());
             curr.setRight(removeRec(curr.getRight(), node));
             return curr;
@@ -167,5 +194,11 @@ public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
 //                nodes.add(node.getRight());
 //            }
 //        }
+    }
+
+    @Override
+    public void clear() {
+        this.root = null;
+        this.size = 0;
     }
 }

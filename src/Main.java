@@ -1,31 +1,36 @@
-import probabilistic.BloomFilter.BloomFilter;
-import probabilistic.Treaps.Treap;
+import trees.BST.BinarySearchTree;
+import trees.node.Node;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Main {
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, InterruptedException {
-        BloomFilter<Integer> bF = new BloomFilter<>(4000000, 0.6);
+    public static void main(String[] args) {
 
-        System.out.println(bF.getSize());
-        System.out.println(bF.getHashNum());
-        Thread.sleep(10000);
-        System.out.println("------------------");
+        for (int k = 1; k < 1000000; k *= 10) {
+            BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+            ArrayList<Integer> inputList = new ArrayList<>();
 
-        bF.add(4000000);
-        int j = 0;
+            for (int i = 0; i < k; i++) {
+                inputList.add(i);
+            }
 
-        while (!bF.contains(j)) {
-            j++;
-            System.out.println(j);
-        }
-        System.out.println("We needed " + j  + " iterations to find a collision");
-    }
+            for (int i = 0; i < k; i++) {
+                int a = inputList.get(i);
+                tree.insert(new Node<>(a));
+            }
+            System.out.println("normal insertion height : " + (k-1));
 
-    public static void search(Treap<Integer> t, int value) {
-        if (t.search(value)) {
-            System.out.println("Value " + value + " was found!");
-        } else System.out.println("Value " + value + " was not found!");
+            tree.clear();
+            ArrayList<Integer> n = (ArrayList<Integer>) inputList.clone();
+            while (!n.isEmpty()) {
+                int value = new Random().nextInt(n.size());
+                int a = n.get(value);
+                tree.insert(a);
+                n.remove(value);
+
+            }
+            System.out.println("randomized insertion height : " + tree.height());
+            }
     }
 }

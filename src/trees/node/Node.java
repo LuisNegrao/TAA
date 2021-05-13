@@ -10,6 +10,7 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     private int height;
     private Node<T> left;
     private Node<T> right;
+    public int depth;
     /*Constructor*/
 
     public Node() {
