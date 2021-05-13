@@ -1,7 +1,7 @@
 package trees.test;
 
 import org.junit.jupiter.api.Test;
-import trees.AVLTree;
+import trees.AVL.AVLTree;
 import trees.node.Node;
 
 import static org.junit.jupiter.api.Assertions.*;

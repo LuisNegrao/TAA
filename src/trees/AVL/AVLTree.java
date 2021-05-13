@@ -1,5 +1,6 @@
-package trees;
+package trees.AVL;
 
+import trees.Tree;
 import trees.node.Node;
 
 public class AVLTree<T extends Comparable<T>> extends Tree<T> {

@@ -1,7 +1,8 @@
-package trees;
+package trees.BST;
 
 
 import com.sun.istack.internal.NotNull;
+import trees.Tree;
 import trees.node.Node;
 
 import java.util.LinkedList;

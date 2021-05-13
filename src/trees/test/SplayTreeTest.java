@@ -1,13 +1,10 @@
 package trees.test;
 
 import org.junit.jupiter.api.Test;
-import trees.SplayTree;
+import trees.Splay.SplayTree;
 import trees.node.Node;
 
-import java.util.ArrayList;
 import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SplayTreeTest {
 
@@ -24,7 +21,7 @@ class SplayTreeTest {
             tree.insert(new Node<>(new Random().nextInt()));
         }
         tree.clear();
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000000; i++) {
             tree.insert(new Node<>(new Random().nextInt()));
         }
 

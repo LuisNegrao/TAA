@@ -1,8 +1,7 @@
 package trees.test;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import trees.BinarySearchTree;
+import trees.BST.BinarySearchTree;
 import trees.node.Node;
 
 import static org.junit.jupiter.api.Assertions.*;

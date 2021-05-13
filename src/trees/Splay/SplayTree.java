@@ -1,7 +1,8 @@
-package trees;
+package trees.Splay;
 //https://www.sanfoundry.com/java-program-implement-splay-tree/
 
 import com.sun.istack.internal.NotNull;
+import trees.Tree;
 import trees.node.Node;
 
 public class SplayTree<T extends Comparable<T>> extends Tree<T> {

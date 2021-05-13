@@ -1,8 +1,7 @@
 package probabilistic.Treaps;
 
-import probabilistic.Treaps.TNode;
-
 import java.util.List;
+
 
 public class Treap<T extends Comparable<T>> {
 
@@ -143,7 +142,7 @@ public class Treap<T extends Comparable<T>> {
 
     /*Auxiliar methods*/
     //Empty the tree
-    public void dumpTree() {
+    public void clearTree() {
         root = nil;
     }
 
