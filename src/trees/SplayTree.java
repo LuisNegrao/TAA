@@ -68,6 +68,8 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
 
             node.setParent(null);
             parent.setParent(node);
+            this.root = node;
+
 
             if (parent.getLeft() != null) {
                 parent.getLeft().setParent(parent);
@@ -117,6 +119,7 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
 
             node.setParent(null);
             parent.setParent(node);
+            this.root = node;
 
             if (parent.getRight() != null) {
                 parent.getRight().setParent(parent);
@@ -184,7 +187,7 @@ public class SplayTree<T extends Comparable<T>> extends Tree<T> {
                         zig(node, node.getParent());
 
                     } else {
-                        // System.out.println("hello2");
+                       // System.out.println("hello2");
                         zag(node, parent);
                         zag(node, node.getParent());
                     }

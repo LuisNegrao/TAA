@@ -12,6 +12,9 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     private Node<T> right;
     /*Constructor*/
 
+    public Node() {
+    }
+
     public Node(T info) {
         this.info = info;
     }
